@@ -51,12 +51,6 @@ export class UserLoginService {
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'login', userDetails).pipe(
-      // map((user:any) => {
-      //   if (user && user.token) {
-      //     localStorage.setItem('currentUser', JSON.stringify(user));
-      //   }
-      //   return user;
-      // }),
       catchError(this.handleError)
     );
   } 
