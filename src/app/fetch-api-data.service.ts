@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 const apiUrl = 'https://the-greatest.herokuapp.com/';  //**PLEASE PUT YOUR OWN API URL HERE!!!
 @Injectable({
   providedIn: 'root'
-})
+}) 
 
 export class UserRegistrationService {
   //Inject the HttpClient module to the constructor params
@@ -39,6 +39,10 @@ export class UserRegistrationService {
   }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+
 export class UserLoginService {
   constructor(private http: HttpClient){
   }
@@ -47,12 +51,12 @@ export class UserLoginService {
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'login', userDetails).pipe(
-      map((user:any) => {
-        if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        }
-        return user;
-      }),
+      // map((user:any) => {
+      //   if (user && user.token) {
+      //     localStorage.setItem('currentUser', JSON.stringify(user));
+      //   }
+      //   return user;
+      // }),
       catchError(this.handleError)
     );
   } 
@@ -71,6 +75,10 @@ export class UserLoginService {
     );
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class GetAllMoviesService {
   constructor(private http: HttpClient){
@@ -109,6 +117,10 @@ export class GetAllMoviesService {
   }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+
 export class GetOneMovieService {
   constructor(private http: HttpClient){
   }
@@ -144,6 +156,10 @@ export class GetOneMovieService {
     );
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class GetDirectorService {
   constructor(private http: HttpClient) {
@@ -181,6 +197,10 @@ export class GetDirectorService {
   }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+
 export class GetGenreService {
   constructor(private http: HttpClient) {
   }
@@ -216,6 +236,10 @@ export class GetGenreService {
     );
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class GetUserService {
   constructor(private http: HttpClient) {
@@ -253,6 +277,10 @@ export class GetUserService {
   }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+
 export class GetFavoriteMoviesService{
   constructor(private http: HttpClient) {
   }
@@ -288,6 +316,10 @@ export class GetFavoriteMoviesService{
     );
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class AddFavoriteMovieService {
   constructor(private http: HttpClient) {
@@ -325,6 +357,10 @@ export class AddFavoriteMovieService {
   }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+
 export class EditUserService {
   constructor(private http: HttpClient) {
   }
@@ -361,6 +397,10 @@ export class EditUserService {
   }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+
 export class DeleteUserService {
   constructor(private http: HttpClient) {
   }
@@ -396,6 +436,10 @@ export class DeleteUserService {
     );
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class DeleteFavoriteMovieService {
   constructor(private http: HttpClient) {
