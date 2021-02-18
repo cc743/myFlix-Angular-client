@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserLoginService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login-form',
@@ -13,6 +14,7 @@ export class UserLoginFormComponent implements OnInit {
   @Input() userData = { username: '', password: '' };
 
   constructor(
+    public router: Router,
     public fetchApiData: UserLoginService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar) { }
@@ -36,6 +38,7 @@ export class UserLoginFormComponent implements OnInit {
         duration: 2000
       });
     });
+    this.router.navigate(['movies']);
   }
 
 }
