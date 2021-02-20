@@ -1,1 +1,6 @@
-<p>user-profile works!</p>
+<mat-card *ngFor="let user of users; let i=index;">
+  <mat-dialog-content>
+    <mat-card-title>{{user.username}}</mat-card-title>
+    <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+  </mat-dialog-content>
+</mat-card>

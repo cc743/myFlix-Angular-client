@@ -240,9 +240,9 @@ export class GetUserService {
   }
 
   //making the api call to get user endpoint (I am assuming a single user?)
-  getUser(): Observable<any> {
+  getUser(username: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'users/:username', {headers: new HttpHeaders(
+    return this.http.get(apiUrl + `users/${username}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -252,7 +252,7 @@ export class GetUserService {
   }
 
   private extractResponseData(res: Response): any {
-    const body = res;
+    const body = res;  //check here
     return body || { };
   }
 

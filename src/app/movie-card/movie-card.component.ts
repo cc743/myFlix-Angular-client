@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GetAllMoviesService } from '../fetch-api-data.service'
+import { GetAllMoviesService } from '../fetch-api-data.service';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-movie-card',
@@ -9,7 +11,10 @@ import { GetAllMoviesService } from '../fetch-api-data.service'
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
 
-  constructor(public getAllMovies: GetAllMoviesService) { }
+  constructor(
+    public getAllMovies: GetAllMoviesService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.getMovies();
@@ -20,6 +25,13 @@ export class MovieCardComponent implements OnInit {
       this.movies = resp;
       console.log(this.movies);
       return this.movies;
+    });
+  }
+
+  //this is the function that will open the dialog when the 'go to profile information' button is clicked
+  openUserProfileDialog(): void {
+    this.dialog.open(UserProfileComponent, {
+      width: '280px'
     });
   }
 
