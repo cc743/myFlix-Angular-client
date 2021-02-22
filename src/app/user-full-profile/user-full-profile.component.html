@@ -20,25 +20,46 @@
         <mat-form-field>
           <input
             matInput
-            placeholder="New Username"
+            class="input"
+            [(ngModel)]="userData.username"
+            placeholder="new username"
             type="text"
+            name="username"
+            required
           >
         </mat-form-field>
         <mat-form-field>
           <input
             matInput
+            class="input"
+            [(ngModel)]="userData.password"
             type="password"
-            placeholder="New Password"
+            placeholder="new password"
+            name="password"
+            required
           >
         </mat-form-field>
         <mat-form-field>
           <input
             matInput
-            placeholder="New Email"
+            class="input"
+            [(ngModel)]="userData.email"
+            placeholder="new email"
             type="email"
+            name="email"
+            required
           >
         </mat-form-field>
       </form>
     </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        (click)="editUserData()"
+        color="primary"
+      >
+        Edit Profile
+      </button>
+    </mat-card-actions>
   </mat-card>
 </div>

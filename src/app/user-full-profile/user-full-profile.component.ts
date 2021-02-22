@@ -18,7 +18,8 @@ export class UserFullProfileComponent implements OnInit {
 
   constructor(
     public getUser: GetUserService,
-    public editUser: EditUserService
+    public editUser: EditUserService,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -33,13 +34,22 @@ export class UserFullProfileComponent implements OnInit {
       //console.log(this.users);
     });
   }
-
-  // editUserUser(): void {
-  //   const user = localStorage.getItem('user');
-  //   this.editUser.editUser(user).subscribe((resp: any) => {
-  //     console.log(resp);
-  //   })
-  // }
+  //ahh it didn't work.  Try again later
+  editUserData(): void {
+    this.editUser.editUser(this.userData).subscribe((resp: any) => {
+      console.log(resp);
+      this.snackBar.open("your profile was successfully updated.", "OK", {
+        duration: 2000,
+        verticalPosition: "top"
+      });
+    },
+    (resp) => {
+      console.log(resp);
+      this.snackBar.open(resp, "OK", {
+        duration: 5000,
+      });
+    });
+  }
 
 
 }

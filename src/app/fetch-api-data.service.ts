@@ -372,7 +372,7 @@ export class EditUserService {
       );
   }
 
-  private extractResponseData(res: Response): any {
+  private extractResponseData(res: Object): any {
     const body = res;
     return body || { };
   }
