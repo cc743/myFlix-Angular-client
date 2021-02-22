@@ -360,9 +360,10 @@ export class EditUserService {
   }
 
   //making an api call to edit the user's information
-  editUser(): Observable<any> {
+  editUser(userData: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + 'users/:username', {headers: new HttpHeaders(
+    const username = localStorage.getItem('user');
+    return this.http.put(apiUrl + `users/${username}`, userData, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(

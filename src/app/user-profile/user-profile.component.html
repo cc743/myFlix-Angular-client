@@ -1,6 +1,18 @@
 <mat-card *ngFor="let user of users; let i=index;">
   <mat-dialog-content>
-    <mat-card-title>{{user.username}}</mat-card-title>
-    <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+    <mat-card-title>Profile Information</mat-card-title>
+    <br/>
+    <mat-card-subtitle>Username: {{user.username}}</mat-card-subtitle>
+    <mat-card-subtitle>Email: {{user.email}}</mat-card-subtitle>
+    <mat-card-subtitle>Favorite Movies: {{user.favoriteMovie}}</mat-card-subtitle>
   </mat-dialog-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      (click)="routeToFull()"
+      color="primary"
+    >
+      Edit Profile Information
+    </button>
+  </mat-card-actions>
 </mat-card>

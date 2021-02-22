@@ -23,7 +23,7 @@ export class MovieCardComponent implements OnInit {
   getMovies(): void {
     this.getAllMovies.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
+      //console.log(this.movies);
       return this.movies;
     });
   }
@@ -31,7 +31,7 @@ export class MovieCardComponent implements OnInit {
   //this is the function that will open the dialog when the 'go to profile information' button is clicked
   openUserProfileDialog(): void {
     this.dialog.open(UserProfileComponent, {
-      width: '280px'
+      width: '480px'
     });
   }
 
