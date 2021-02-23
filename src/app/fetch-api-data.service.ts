@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'https://the-greatest.herokuapp.com/';  //**PLEASE PUT YOUR OWN API URL HERE!!!
+const apiUrl = 'https://the-greatest.herokuapp.com/'; 
 @Injectable({
   providedIn: 'root'
 }) 
@@ -320,9 +320,10 @@ export class AddFavoriteMovieService {
   }
 
   //making an api call to add a favorite movie
-  addFavoriteMovie(): Observable<any> {
+  addFavoriteMovie(id: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + 'users/:username/movies/:movieID', {headers: new HttpHeaders(
+    const username = localStorage.getItem('user');
+    return this.http.put(apiUrl + `users/${username}/movies/${id}`, id, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(

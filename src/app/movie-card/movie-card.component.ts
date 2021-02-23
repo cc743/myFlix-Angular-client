@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetAllMoviesService } from '../fetch-api-data.service';
+import { GetAllMoviesService, AddFavoriteMovieService } from '../fetch-api-data.service';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
@@ -17,6 +17,7 @@ export class MovieCardComponent implements OnInit {
 
   constructor(
     public getAllMovies: GetAllMoviesService,
+    public addFavoriteMovie: AddFavoriteMovieService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) { }
@@ -30,6 +31,20 @@ export class MovieCardComponent implements OnInit {
       this.movies = resp;
       console.log(this.movies);
       return this.movies;
+    });
+  }
+
+  addFavMovie(id: string, Title: string): void{
+    this.addFavoriteMovie.addFavoriteMovie(id).subscribe((resp: any) => {
+      console.log(resp);
+      this.snackBar.open(
+        `${Title} added to your favorites`,
+        'OK',
+        {
+          duration: 2000,
+          verticalPosition: 'top'
+        }
+      );
     });
   }
 
