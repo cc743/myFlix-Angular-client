@@ -29,22 +29,22 @@ export class UserFullProfileComponent implements OnInit {
   getUserUser(): void {
     const user = localStorage.getItem('user');
     this.getUser.getUser(user).subscribe((resp: any) => {
-      console.log(resp);
+      //console.log(resp);
       this.users.push(resp);
       //console.log(this.users);
     });
   }
-  //ahh it didn't work.  Try again later
+  
   editUserData(): void {
     this.editUser.editUser(this.userData).subscribe((resp: any) => {
-      console.log(resp);
+      //console.log(resp);
       this.snackBar.open("your profile was successfully updated.", "OK", {
         duration: 2000,
         verticalPosition: "top"
       });
     },
     (resp) => {
-      console.log(resp);
+      //console.log(resp);
       this.snackBar.open(resp, "OK", {
         duration: 5000,
       });
