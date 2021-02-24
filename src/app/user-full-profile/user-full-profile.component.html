@@ -63,3 +63,16 @@
     </mat-card-actions>
   </mat-card>
 </div>
+
+<br/>
+
+<div>
+  <h1>Your Favorite Movies</h1>
+  <mat-card *ngFor="let movie of favMovies; let i = index">
+    <mat-card-header>
+      <mat-card-title>{{movie.Title}}</mat-card-title>
+      <mat-card-subtitle>Directed By: {{movie.Director.Name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img src={{movie.ImagePath}} alt= {{movie.Title}} />
+  </mat-card>
+</div>

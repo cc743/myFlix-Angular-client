@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { GetUserService, EditUserService } from '../fetch-api-data.service';
+import { GetUserService, EditUserService, GetAllMoviesService } from '../fetch-api-data.service';
 
 @Component({
   selector: 'app-user-full-profile',
@@ -15,15 +15,18 @@ export class UserFullProfileComponent implements OnInit {
   users: any[] = [];
   movieIDs: any[] = [];
   movies: any[] = [];
+  favMovies: any[] = [];
 
   constructor(
     public getUser: GetUserService,
     public editUser: EditUserService,
+    public getAllMovies: GetAllMoviesService,
     public snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.getUserUser();  //getUserUser() to distinguish from getUser (above)
+    this.getFavoriteMovies();
   }
 
   getUserUser(): void {
@@ -31,7 +34,34 @@ export class UserFullProfileComponent implements OnInit {
     this.getUser.getUser(user).subscribe((resp: any) => {
       //console.log(resp);
       this.users.push(resp);
-      //console.log(this.users);
+    });
+  }
+
+  getFavoriteMovies(): void {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.getUser.getUser(user).subscribe((resp: any) => {
+        this.movieIDs = resp.favoriteMovie;
+        //console.log(resp);
+        //console.log(this.movieIDs);
+        return this.movieIDs;
+      });
+    }
+    setTimeout(() => {
+      this.getMovies();
+    }, 100);
+  }
+
+  getMovies(): void {
+    this.getAllMovies.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      console.log(this.movies);
+      this.movies.forEach((movie) => {
+        if(this.movieIDs.includes(movie._id))
+          this.favMovies.push(movie);
+      });
+      console.log(this.favMovies);
+      return this.favMovies;
     });
   }
   
