@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { GetUserService, EditUserService, GetAllMoviesService } from '../fetch-api-data.service';
+import { GetUserService, EditUserService, GetAllMoviesService, DeleteFavoriteMovieService } from '../fetch-api-data.service';
 
 @Component({
   selector: 'app-user-full-profile',
@@ -21,7 +21,9 @@ export class UserFullProfileComponent implements OnInit {
     public getUser: GetUserService,
     public editUser: EditUserService,
     public getAllMovies: GetAllMoviesService,
-    public snackBar: MatSnackBar
+    public deleteFavoriteMovie: DeleteFavoriteMovieService,
+    public snackBar: MatSnackBar, 
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +64,21 @@ export class UserFullProfileComponent implements OnInit {
       });
       console.log(this.favMovies);
       return this.favMovies;
+    });
+  }
+
+  deleteMovie(id: string, title: string): void{
+    this.deleteFavoriteMovie.deleteFavoriteMovie(id).subscribe((resp: any) => {
+      console.log(resp);
+      this.snackBar.open(
+        `${title} removied from your favorites`,
+        'OK',
+        {
+          duration: 3000,
+          verticalPosition: 'top'
+        }
+      );
+      this.router.navigate(['movies']);
     });
   }
   

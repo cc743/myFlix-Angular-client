@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { GetUserService, GetAllMoviesService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 
@@ -19,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     public getUser: GetUserService,
     public getMovies: GetAllMoviesService,
+    public dialogRef: MatDialogRef<UserProfileComponent>,
     public router: Router
   ) { }
 
@@ -35,16 +37,10 @@ export class UserProfileComponent implements OnInit {
       this.movieIDs = resp.favoriteMovie;
       console.log(this.movieIDs);
     });
-    // this.getMovies.getAllMovies().subscribe((resp: any) => {
-    //   this.movies.push(resp);
-    //   console.log(this.movies);
-    //   this.movies.forEach((movie) => {
-    //     console.log(movie._id);
-    //   });
-    // });
   }
 
   routeToFull(): void{
+    this.dialogRef.close();
     this.router.navigate(['fullProfile']);
   }
 

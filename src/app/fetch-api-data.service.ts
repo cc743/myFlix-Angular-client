@@ -443,9 +443,10 @@ export class DeleteFavoriteMovieService {
   }
 
   //making an api call to delete a favorite movie
-  deleteFavoriteMovie(): Observable<any> {
+  deleteFavoriteMovie(id: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/:username/movies/:movieID', {headers: new HttpHeaders(
+    const username = localStorage.getItem('user');
+    return this.http.delete(apiUrl + `users/${username}/movies/${id}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
