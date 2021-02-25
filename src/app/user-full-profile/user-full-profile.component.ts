@@ -54,12 +54,12 @@ export class UserFullProfileComponent implements OnInit {
   getMovies(): void {
     this.getAllMovies.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
+      //console.log(this.movies);
       this.movies.forEach((movie) => {
         if(this.movieIDs.includes(movie._id))
           this.favMovies.push(movie);
       });
-      console.log(this.favMovies);
+      //console.log(this.favMovies);
       return this.favMovies;
     });
   }

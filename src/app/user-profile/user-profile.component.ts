@@ -33,7 +33,7 @@ export class UserProfileComponent implements OnInit {
     this.getUser.getUser(user).subscribe((resp: any) => {
       this.users.push(resp);
       this.movieIDs = resp.favoriteMovie;
-      console.log(this.movieIDs);
+      //console.log(this.movieIDs);
     });
   }
 
