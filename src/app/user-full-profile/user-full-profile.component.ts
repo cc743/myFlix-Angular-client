@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { GetUserService, EditUserService, GetAllMoviesService, DeleteFavoriteMovieService } from '../fetch-api-data.service';
@@ -43,18 +42,17 @@ export class UserFullProfileComponent implements OnInit {
     if (user) {
       this.getUser.getUser(user).subscribe((resp: any) => {
         this.movieIDs = resp.favoriteMovie;
-        return this.movieIDs;
+        //return this.movieIDs;
+        this.getMovies();
       });
     }
-    setTimeout(() => {
-      this.getMovies();
-    }, 100);
   }
 
   getMovies(): void {
     this.getAllMovies.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       //console.log(this.movies);
+      this.favMovies = [];
       this.movies.forEach((movie) => {
         if(this.movieIDs.includes(movie._id))
           this.favMovies.push(movie);
@@ -75,7 +73,8 @@ export class UserFullProfileComponent implements OnInit {
           verticalPosition: 'top'
         }
       );
-      this.router.navigate(['movies']);
+      //this.router.navigate(['movies']);
+      this.getFavoriteMovies();
     });
   }
   

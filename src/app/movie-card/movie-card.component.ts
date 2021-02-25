@@ -32,7 +32,6 @@ export class MovieCardComponent implements OnInit {
     this.getAllMovies.getAllMovies().subscribe((resp: any) => {
       console.log(resp);
       this.movies = resp;
-      return this.movies;
     });
   }
 
