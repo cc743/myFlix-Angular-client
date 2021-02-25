@@ -6,6 +6,7 @@ import { MovieDirectorComponent } from '../movie-director/movie-director.compone
 import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -19,7 +20,8 @@ export class MovieCardComponent implements OnInit {
     public getAllMovies: GetAllMoviesService,
     public addFavoriteMovie: AddFavoriteMovieService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +48,12 @@ export class MovieCardComponent implements OnInit {
         }
       );
     });
+  }
+
+  logOutUser(): void{
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    this.router.navigate(['welcome']);
   }
 
   //this is the function that will open the dialog when the 'go to profile information' button is clicked

@@ -1,10 +1,3 @@
-<!-- <mat-card *ngFor="let movie of movies; let i=index;">
-  <mat-dialog-content>
-    <mat-card-title>{{movie.Title}}</mat-card-title>
-    <mat-card-subtitle><img src={{movie.ImagePath}}></mat-card-subtitle>
-  </mat-dialog-content>
-</mat-card> -->
-
 <div style="display: flex;">
   <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;">
       <mat-card-header>
@@ -51,5 +44,16 @@
     color="primary"
   >
     Go to Profile Information
+  </button>
+</div>
+
+<div>
+  <button
+    mat-raised-button
+    (click)="logOutUser()"
+    style="margin-left: 10px; margin-top: 20px;"
+    color="primary"
+  >
+    Log Out
   </button>
 </div>

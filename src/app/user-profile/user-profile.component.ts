@@ -31,9 +31,7 @@ export class UserProfileComponent implements OnInit {
   getUserUser(): void {
     const user = localStorage.getItem('user');
     this.getUser.getUser(user).subscribe((resp: any) => {
-      //console.log(resp);
       this.users.push(resp);
-      //console.log(this.users);
       this.movieIDs = resp.favoriteMovie;
       console.log(this.movieIDs);
     });

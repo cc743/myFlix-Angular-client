@@ -34,7 +34,6 @@ export class UserFullProfileComponent implements OnInit {
   getUserUser(): void {
     const user = localStorage.getItem('user');
     this.getUser.getUser(user).subscribe((resp: any) => {
-      //console.log(resp);
       this.users.push(resp);
     });
   }
@@ -44,8 +43,6 @@ export class UserFullProfileComponent implements OnInit {
     if (user) {
       this.getUser.getUser(user).subscribe((resp: any) => {
         this.movieIDs = resp.favoriteMovie;
-        //console.log(resp);
-        //console.log(this.movieIDs);
         return this.movieIDs;
       });
     }
@@ -96,6 +93,9 @@ export class UserFullProfileComponent implements OnInit {
         duration: 5000,
       });
     });
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    this.router.navigate(['welcome']);
   }
 
 
