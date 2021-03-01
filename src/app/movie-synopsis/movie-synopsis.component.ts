@@ -8,6 +8,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class MovieSynopsisComponent {
 
+  /**
+   * called upon when creating an instance of the class
+   * injects film's description(synopsis) into class from movie-card.component
+   * @param data 
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {

@@ -16,6 +16,14 @@ import { Router } from '@angular/router';
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
 
+  /**
+   * called upon when creating an instance of the class
+   * @param getAllMovies 
+   * @param addFavoriteMovie 
+   * @param dialog 
+   * @param snackBar 
+   * @param router 
+   */
   constructor(
     public getAllMovies: GetAllMoviesService,
     public addFavoriteMovie: AddFavoriteMovieService,
@@ -25,9 +33,16 @@ export class MovieCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    /**
+     * called upon page load to retrieve all movies from database
+     */
     this.getMovies(); 
   }
 
+  /**
+   * retrieves all movies from database
+   * @returns this.movies
+   */
   getMovies(): void {
     this.getAllMovies.getAllMovies().subscribe((resp: any) => {
       console.log(resp);
@@ -35,9 +50,14 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Function that adds a movie to a user's favorite movies array
+   * @param id 
+   * @param Title 
+   */
   addFavMovie(id: string, Title: string): void{
     this.addFavoriteMovie.addFavoriteMovie(id).subscribe((resp: any) => {
-      console.log(resp);
+      //console.log(resp);
       this.snackBar.open(
         `${Title} added to your favorites`,
         'OK',
@@ -49,20 +69,33 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Function that logs user out from the app
+   * removes "user" and "token" items from localStorage, 
+   * routes user back to the Welcome page
+   */
   logOutUser(): void{
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     this.router.navigate(['welcome']);
   }
 
-  //this is the function that will open the dialog when the 'go to profile information' button is clicked
+  /**
+   * Function that will open the dialog when the "Go to Profile Information" button is clicked
+   * @returns UserProfileComponent in dialog with information displaying username, email
+   * @returns button which sends user to full user profile page
+   */
   openUserProfileDialog(): void {
     this.dialog.open(UserProfileComponent, {
       width: '480px'
     });
   }
 
-  //this is the function that will open the dialog when the "genre" button is clicked
+  /**
+   * Function that will open the dialog displaying genre's information when "Genre" button is clicked
+   * @param Name 
+   * @param Description 
+   */
   openGenreDialog(Name: string, Description: string): void{
     this.dialog.open(MovieGenreComponent, {
       data: { Name, Description },
@@ -71,7 +104,13 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  //this is the function that will open the dialog when the "director" button is clicked
+  /**
+   * Function that will open the dialog displaying director's information when "Director" button is clicked
+   * @param Name 
+   * @param Bio 
+   * @param Birth 
+   * @param Death 
+   */
   openDirectorDialog(Name: string, Bio: string, Birth: string, Death: string): void{
     this.dialog.open(MovieDirectorComponent, {
       data: { Name, Bio, Birth, Death },
@@ -80,7 +119,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  //this is the function that will open the dialog when the "synopsis" button is clicked
+  /**
+   * Function that will open the dialog displaying the movie's description when "Synopsis" button is clicked
+   * @param Description 
+   */
   openSynopsisDialog(Description: string): void{
     this.dialog.open(MovieSynopsisComponent, {
       data: {Description},
